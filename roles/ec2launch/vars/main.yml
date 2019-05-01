@@ -11,7 +11,7 @@ yes_no: 'yes'
 Application: 'Autolaunch'
 Creator: 'sheikfarzand'
 Description: 'Cloud vm for CICD'
-Name: 'LambdaTest'
+Name: 'LT-Infra'
 Owner: 'sheikfarzand'
 Technology: 'linuxplain'
 
