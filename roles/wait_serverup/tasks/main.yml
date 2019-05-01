@@ -1,0 +1,20 @@
+---
+- name: Debug for checking jenkins IP once again in another play
+  debug:
+    msg: "{{ hostvars['localhost']['ec2_details']['tagged_instances'][0]['public_ip'] }}"
+
+#- name: Write to a file
+#  local_action: copy content="{{hostvars['localhost']['ec2_details']['tagged_instances'][0]['public_ip']}}" dest=public_ip
+
+- name: Wait till ssh to be available
+  wait_for:
+    port: 22
+    delay: 1
+    host: "{{ hostvars['localhost']['ec2_details']['tagged_instances'][0]['public_ip'] }}"
+    timeout: 300
+  register: wait_status
+
+- name: Wait debugging
+  debug:
+    msg: "{{ wait_status }}"
+

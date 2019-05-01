@@ -1,0 +1,14 @@
+---
+- name: add newly launched ec2 ip to inventory
+  add_host:
+    hostname: "{{ public_ip }}"
+    ansible_ssh_private_key_file: ~/raziaws2.pem
+    groupname: lambdatest
+
+- name: Wait till ssh will be available
+  wait_for:
+    port: 22
+    host: "{{ public_ip }}"
+    state: present
+    timeout: 300
+

@@ -1,0 +1,18 @@
+---
+region: 'us-east-2'
+instance_type: 't2.micro'
+ami: 'ami-04328208f4f0cf1fe'
+security_group: 'launch-wizard-4'
+key_pair: 'raziaws2'
+role: 'ec2ssm'
+subnet: 'subnet-fa5080b6'
+yes_no: 'yes'
+
+Application: 'Autolaunch'
+Creator: 'sheikfarzand'
+Description: 'Cloud vm for CICD'
+Name: 'LambdaTest'
+Owner: 'sheikfarzand'
+Technology: 'linuxplain'
+
+public_ip: '{{ ec2_details.tagged_instances.0.public_ip }}'

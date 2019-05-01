@@ -1,0 +1,40 @@
+---
+
+- name: set yum repo
+  template: src="{{item}}" dest=/etc/yum.repos.d/{{item}} mode=0644 owner=root
+  with_items:
+    - epel.repo
+    - epel-testing.repo
+    - vault.repo
+    - mirror1.repo
+    - mirror2.repo
+    - docker-ce.repo
+
+- name: set yum conf
+  template: src="yum.conf" dest=/etc/yum.conf mode=0644 owner=root
+
+- name: yum clean
+  shell: yum clean all
+  ignore_errors: yes
+
+- name: install docker and other packages
+  yum: name="{{item}}" state=present update_cache=yes
+  with_items:
+    - tree
+    - java
+    - git
+    - maven
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - containerd.io
+    - docker-ce-cli
+    - docker-ce
+
+
+- name: Enable and start docker service
+  service: name=docker enabled=yes state=started
+
+- name: Public URL
+  debug:
+    msg: "{{ hostvars['localhost']['ec2_details']['tagged_instances'][0]['public_ip'] }}"

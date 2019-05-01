@@ -1,0 +1,4 @@
+[mirror1]
+name=mirror1
+baseurl=http://mirror.centos.org/centos/7/extras/x86_64/
+enabled=1

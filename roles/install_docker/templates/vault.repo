@@ -1,0 +1,4 @@
+[vault]
+name=vault
+baseurl=http://vault.centos.org/7.5.1804/os/x86_64/
+enabled=1

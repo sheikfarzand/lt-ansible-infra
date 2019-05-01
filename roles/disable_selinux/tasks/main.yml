@@ -1,0 +1,16 @@
+---
+- name: Disable SElinux
+  selinux:
+    state: disabled
+  register: sestatus
+
+- name: Debug
+  debug:
+    msg: "{{ sestatus.reboot_required }}"
+
+- name: Reboot after changing SElinux status
+  shell: sleep 2 && reboot
+  async: 1
+  poll: 0
+  when: sestatus.reboot_required is defined and sestatus.reboot_required == True
+

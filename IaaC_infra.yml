@@ -1,0 +1,30 @@
+---
+- hosts: local
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - ec2launch
+    - update_inventory
+
+- hosts: lambdatest
+  gather_facts: true
+  remote_user: ec2-user
+  become: true
+  any_errors_fatal: true
+  roles:
+    - disable_selinux
+
+- hosts: local
+  gather_facts: true
+  any_errors_fatal: true
+  roles:
+    - wait_serverup
+
+- hosts: lambdatest
+  gather_facts: false
+  remote_user: ec2-user
+  become: true
+  any_errors_fatal: true
+  roles:
+    - install_docker
+
